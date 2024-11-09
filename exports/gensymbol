@@ -486,7 +486,7 @@ lapackobjs2d="
     dtptrs
     dtrcon dtrevc dtrexc dtrrfs dtrsen dtrsna dtrsyl
     dtrtrs dtzrzf dstemr
-    dsgesv dsposv dlag2s slag2d dlat2s
+    dsgesv dsposv dlag2s dlag2d dlat2s
     dlansf dpftrf dpftri dpftrs dsfrk dtfsm dtftri dtfttp
     dtfttr dtpttf dtpttr dtrttf dtrttp
     dgejsv  dgesvj  dgsvj0  dgsvj1

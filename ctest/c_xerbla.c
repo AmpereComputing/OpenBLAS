@@ -9,7 +9,11 @@ void cblas_xerbla(blasint info, char *rout, char *form, ...)
 {
    extern int cblas_lerr, cblas_info, cblas_ok;
    extern int link_xerbla;
+#ifdef OS_WINDOWS
+   extern __declspec(selectany) int RowMajorStrg;
+#else
    extern int RowMajorStrg;
+#endif
    extern char *cblas_rout;
 
    /* Initially, c__3chke will call this routine with

@@ -33,7 +33,11 @@ void F77_c2chke(char *rout) {
           BETA[2]  = {0.0,0.0},
           RALPHA = 0.0;
    extern int cblas_info, cblas_lerr, cblas_ok;
+#ifdef OS_WINDOWS
+   int RowMajorStrg = TRUE;
+#else   
    extern int RowMajorStrg;
+#endif
    extern char *cblas_rout;
 
    if (link_xerbla) /* call these first to link */

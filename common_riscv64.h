@@ -97,6 +97,7 @@ static inline int blas_quickdivide(blasint x, blasint y){
 // t-head toolchain uses obsolete rvv intrinsics, can't build for C910V without this
 #define RISCV_0p10_INTRINSICS
 #define RISCV_RVV(x) x
+#include <riscv_vector_v0p10_non_policy_common.h>
 #else
 #define RISCV_RVV(x) __riscv_ ## x
 #endif

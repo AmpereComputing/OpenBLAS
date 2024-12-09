@@ -115,6 +115,11 @@ extern gotoblas_t gotoblas_ARMV8SVE;
 #else
 #define gotoblas_ARMV8SVE gotoblas_ARMV8
 #endif
+#ifdef DYN_ARMV9SME
+extern gotoblas_t gotoblas_ARMV9SME;
+#else
+#define gotoblas_ARMV9SME gotoblas_ARMV8
+#endif
 #ifdef DYN_CORTEX_A55
 extern gotoblas_t  gotoblas_CORTEXA55;
 #else
@@ -148,6 +153,13 @@ extern gotoblas_t  gotoblas_A64FX;
 #define gotoblas_ARMV8SVE   gotoblas_ARMV8
 #define gotoblas_A64FX      gotoblas_ARMV8
 #endif
+
+#ifndef NO_SME
+extern gotoblas_t  gotoblas_ARMV9SME;
+#else
+#define gotoblas_ARMV9SME gotoblas_ARMV8SVE
+#endif
+
 extern gotoblas_t  gotoblas_THUNDERX3T110;
 #endif
 #define gotoblas_NEOVERSEV2 gotoblas_NEOVERSEV1
@@ -393,6 +405,13 @@ static gotoblas_t *get_coretype(void) {
       snprintf(coremsg, 128, "Unknown CPU model - implementer %x part %x\n",implementer,part);
       openblas_warning(1, coremsg);
   }
+
+#if !defined(NO_SME) && defined(HWCAP2_SME2)
+  if ((getauxval(AT_HWCAP2) & HWCAP2_SME2)) {
+    return &gotoblas_ARMV9SME;
+  }
+#endif
+
 #ifndef NO_SVE
   if ((getauxval(AT_HWCAP) & HWCAP_SVE)) {
     return &gotoblas_ARMV8SVE;

@@ -188,6 +188,7 @@ Please read `GotoBLAS_01Readme.txt` for older CPU models already supported by th
 - **Apple Vortex**: preliminary support based on ThunderX2/3
 - **A64FX**:  preliminary support, optimized Level-3 BLAS
 - **ARMV8SVE**: any ARMV8 cpu with SVE extensions 
+- **ARMV9SME**: WIP target, any Arm®v9-A core with SME2 support. Only functional for GEMM.
 
 #### PPC/PPC64
 

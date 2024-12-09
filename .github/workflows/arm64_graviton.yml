@@ -120,7 +120,7 @@ jobs:
             "make")
               MAKE_FLAGS='DYNAMIC_ARCH=1 USE_OPENMP=0'
               wget https://gist.github.com/martin-frbg/96d2252fbb71d0d898ede14691b51657/raw/5c6a89cb1560dce50005dd8484483508fabc039f/issue4939.c
-              gcc -I. -O2 issue4939.c libopenblas.a -o issue4939
+              gcc -I. -O2 issue4939.c libopenblas.a -lgfortran -lm -o issue4939
               ./issue4939
               #echo "::group::Tests in 'test' directory"
               #make -C test $MAKE_FLAGS FC="ccache ${{ matrix.fortran }}"

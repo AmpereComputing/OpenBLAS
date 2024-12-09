@@ -229,3 +229,6 @@ In chronological order:
 
 * Christopher Daley <https://github.com/cdaley>
   * [2024-01-24] Optimize GEMV forwarding on ARM64 systems
+
+* Aymen Qader <aymen.qader@arm.com>
+  * [2024-12-09] Add Arm®v9-A architecture SME2 SGEMM kernels

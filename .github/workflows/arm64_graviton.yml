@@ -88,8 +88,7 @@ jobs:
         run: |
           case "${{ matrix.build }}" in
             "make")
-              wget https://patch-diff.githubusercontent.com/raw/OpenMathLib/OpenBLAS/pull/4963.diff
-              patch -p1 <4963.diff
+              sed -i -e "s/SMALL_MATRIX_OPT = 1/SMALL_MATRIX_OPT = 0/g" Makefile.system
               make -j$(nproc) DYNAMIC_ARCH=1 USE_OPENMP=0 FC="ccache ${{ matrix.fortran }}"
               ;;
             "cmake")

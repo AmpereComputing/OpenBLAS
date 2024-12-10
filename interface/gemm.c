@@ -566,7 +566,11 @@ void CNAME(enum CBLAS_ORDER order, enum CBLAS_TRANSPOSE TransA, enum CBLAS_TRANS
 
 #if USE_SMALL_MATRIX_OPT
 #if !defined(COMPLEX)
+#if defined(ARCH_ARM64)
+  if(args.m*args.n*args.k<=64*64*64){
+#else
   if(GEMM_SMALL_MATRIX_PERMIT(transa, transb, args.m, args.n, args.k, *(FLOAT *)(args.alpha), *(FLOAT *)(args.beta))){
+#endif	  
 	  if(*(FLOAT *)(args.beta) == 0.0){
 		(GEMM_SMALL_KERNEL_B0((transb << 2) | transa))(args.m, args.n, args.k, args.a, args.lda, *(FLOAT *)(args.alpha), args.b, args.ldb, args.c, args.ldc);
 	  }else{

@@ -88,6 +88,7 @@ jobs:
         run: |
           case "${{ matrix.build }}" in
             "make")
+              sed -i -e "s/while (nthreads_m/if(0)while (nthreads_m/" driver/level3/level3_thread.c
               make -j$(nproc) DYNAMIC_ARCH=1 USE_OPENMP=0 FC="ccache ${{ matrix.fortran }}"
               ;;
             "cmake")

@@ -345,6 +345,9 @@ int CNAME(blas_arg_t *args, BLASLONG *range_m, BLASLONG *range_n,
 #if defined(SKYLAKEX) || defined(COOPERLAKE) || defined(SAPPHIRERAPIDS)
 	/* the current AVX512 s/d/c/z GEMM kernel requires n>=6*GEMM_UNROLL_N to achieve best performance */
 	if (min_jj >= 6*GEMM_UNROLL_N) min_jj = 6*GEMM_UNROLL_N;
+#elif defined(ARMV9SME) && !defined(DOUBLE) && !defined(COMPLEX)
+	/* the current SME SGEMM kernel requires n>=8*GEMM_UNROLL_N to achieve best performance */
+	if (min_jj >= 8*GEMM_UNROLL_N) min_jj = 8*GEMM_UNROLL_N;
 #else
         if (min_jj >= 3*GEMM_UNROLL_N) min_jj = 3*GEMM_UNROLL_N;
         else

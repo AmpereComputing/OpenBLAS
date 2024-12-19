@@ -414,6 +414,11 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
           <li class="md-nav__item">
   <a href="#windows-on-arm" class="md-nav__link">
     <span class="md-ellipsis">
@@ -421,7 +426,8 @@
     </span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="Windows on Arm">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#generating-an-import-library" class="md-nav__link">
@@ -803,6 +809,11 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
           <li class="md-nav__item">
   <a href="#windows-on-arm" class="md-nav__link">
     <span class="md-ellipsis">
@@ -810,7 +821,8 @@
     </span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="Windows on Arm">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#generating-an-import-library" class="md-nav__link">
@@ -1284,35 +1296,49 @@ use the <a href="https://github.com/rainers/cv2pdb">cv2pdb</a> tool to do so.</p
   <a href="http://qt.nokia.com/products/developer-tools/">Qt Creator</a>.</li>
 </ul>
 </div>
-<h4 id="windows-on-arm">Windows on Arm</h4>
-<p>While OpenBLAS can be built with Microsoft VisualStudio (Community Edition or commercial), you would only be able to build for the GENERIC target
-that does not use optimized assembly kernels, also the stock VisualStudio lacks the Fortran compiler necessary for building the LAPACK component.
-It is therefore highly recommended to download the free LLVM compiler suite and use it to compile OpenBLAS outside of VisualStudio.</p>
-<p>The following tools needs to be installed to build for Windows on Arm (WoA):</p>
-<ul>
-<li>LLVM for Windows on Arm.
-    Find the latest LLVM build for WoA from <a href="https://releases.llvm.org/">LLVM release page</a> - you want the package whose name ends in "woa64.exe".
-    (This may not always be present in the very latest point release, as building and uploading the binaries takes time.)
-    E.g: a LLVM 19 build for WoA64 can be found <a href="https://github.com/llvm/llvm-project/releases/download/llvmorg-19.1.2/LLVM-19.1.2-woa64.exe">here</a>.
-    Run the LLVM installer and ensure that LLVM is added to the environment variable PATH. (If you do not want to add it to the PATH, you will need to specify
-    both C and Fortran compiler to Make or CMake with their full path later on)</li>
-</ul>
-<p>The following steps describe how to build the static library for OpenBLAS with either Make or CMake:</p>
+<h3 id="windows-on-arm">Windows on Arm</h3>
+<p>A fully functional native OpenBLAS for WoA that can be built as both a static and dynamic library using LLVM toolchain and Visual Studio 2022. Before starting to build, make sure that you have installed Visual Studio 2022 on your ARM device, including the "Desktop Development with C++" component (that contains the cmake tool).
+(Note that you can use the free "Visual Studio 2022 Community Edition" for this task. In principle it would be possible to build with VisualStudio alone, but using
+the LLVM toolchain enables native compilation of the Fortran sources of LAPACK and of all the optimized assembly files, which VisualStudio cannot handle on its own)</p>
 <ol>
 <li>
-<p>Build OpenBLAS with Make:</p>
-<div class="highlight"><pre><span></span><code>$<span class="w"> </span>make<span class="w"> </span><span class="nv">CC</span><span class="o">=</span>clang-cl<span class="w"> </span><span class="nv">FC</span><span class="o">=</span>flang-new<span class="w"> </span><span class="nv">AR</span><span class="o">=</span><span class="s2">&quot;llvm-ar&quot;</span><span class="w"> </span><span class="nv">TARGET</span><span class="o">=</span>ARMV8<span class="w"> </span><span class="nv">ARCH</span><span class="o">=</span>arm64<span class="w"> </span><span class="nv">RANLIB</span><span class="o">=</span><span class="s2">&quot;llvm-ranlib&quot;</span><span class="w"> </span><span class="nv">MAKE</span><span class="o">=</span>make
+<p>Clone OpenBLAS to your local machine and checkout to latest release of OpenBLAS (unless you want to build the latest development snapshot - here we are using  the 0.3.28 release as the example, of course this exact version may be outdated by the time you read this) </p>
+<div class="highlight"><pre><span></span><code>git clone https://github.com/OpenMathLib/OpenBLAS.git
+cd OpenBLAS
+git checkout v0.3.28
 </code></pre></div>
 </li>
 <li>
-<p>Build OpenBLAS with CMake
-    <div class="highlight"><pre><span></span><code>$<span class="w"> </span>mkdir<span class="w"> </span>build
-$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
-$<span class="w"> </span>cmake<span class="w"> </span>..<span class="w"> </span>-G<span class="w"> </span>Ninja<span class="w"> </span>-DCMAKE_C_COMPILER<span class="o">=</span>clang-cl<span class="w"> </span>-DCMAKE_Fortran_COMPILER<span class="o">=</span>flang-new<span class="w"> </span>-DTARGET<span class="o">=</span>ARMV8<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
-$<span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span>.
-</code></pre></div></p>
+<p>Install Latest LLVM toolchain for WoA:</p>
 </li>
 </ol>
+<p>Download the Latest LLVM toolchain for WoA from <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-19.1.5">the Release page</a>. At the time of writing, this     is version 19.1.5 - be sure to select the latest release for which you can find a precompiled package whose name ends in "-woa64.exe" (precompiled packages
+usually lag a week or two behind their corresponding source release).<br />
+Make sure to enable the option “Add LLVM to the system PATH for all the users”
+Note: Make sure that the path of LLVM toolchain is at the top of Environment Variables section to avoid conflicts between the set of compilers available in the system path</p>
+<ol>
+<li>Launch the Native Command Prompt for Windows ARM64:</li>
+</ol>
+<p>From the start menu search for “ARM64 Native Tools Command Prompt for Visual Studio 2022”
+Alternatively open command prompt, run the following command to activate the environment:
+"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsarm64.bat"</p>
+<p>Navigate to the OpenBLAS source code directory and start building OpenBLAS by invoking Ninja:</p>
+<pre><code>   ```cmd
+   cd OpenBLAS
+   mkdir build
+   cd build
+
+   cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DTARGET=ARMV8 -DBINARY=64 -DCMAKE_C_COMPILER=clang-cl -DCMAKE_C_COMPILER=arm64-pc-windows-msvc -DCMAKE_ASM_COMPILER=arm64-pc-windows-msvc -DCMAKE_Fortran_COMPILER=flang-new
+
+   ninja -j16
+   ```
+</code></pre>
+<p>Note: You might want to include additional options in the cmake command here. For example, the default configuration only generates a static.lib version of the library. If you prefer a DLL, you can add -DBUILD_SHARED_LIBS=ON.</p>
+<p>Note that it is also possible to use the same setup to build OpenBLAS with Make, if you prepare Makefiles over the CMake build for some reason:</p>
+<pre><code>```cmd
+$ make CC=clang-cl FC=flang-new AR="llvm-ar" TARGET=ARMV8 ARCH=arm64 RANLIB="llvm-ranlib" MAKE=make
+```
+</code></pre>
 <h4 id="generating-an-import-library">Generating an import library</h4>
 <p>Microsoft Windows has this thing called "import libraries". You need it for
 MSVC; you don't need it for MinGW because the <code>ld</code> linker is smart enough -
@@ -1590,7 +1616,7 @@ provides one implementation of <code>malloc</code> for embedded platforms.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 23, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 18, 2024</span>
   </span>
 
     

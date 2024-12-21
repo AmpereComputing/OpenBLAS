@@ -41,7 +41,7 @@ static int parallel = 0;
 #endif
 
 
-#ifdef NEEDBUNDERSCORE
+#if (NEEDBUNDERSCORE==1)
 int CNAME(void) {
   return parallel;
 }

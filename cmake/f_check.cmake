@@ -45,13 +45,17 @@ if (NOT ONLY_CBLAS)
 
   # TODO: detect whether underscore needed, set #defines and BU appropriately - use try_compile
   # TODO: set FEXTRALIB flags a la f_check?
-
+  if (NOT (${CMAKE_SYSTEM_NAME} MATCHES "Windows" AND ${CMAKE_Fortran_COMPILER_ID} MATCHES "IntelLLVM"))
   set(BU "_")
   file(APPEND ${TARGET_CONF_TEMP}
     "#define BUNDERSCORE _\n"
     "#define NEEDBUNDERSCORE 1\n"
     "#define NEED2UNDERSCORES 0\n")
-
+  else ()
+  file(APPEND ${TARGET_CONF_TEMP}
+    "#define NEEDBUNDERSCORE 0\n"
+    "#define NEED2UNDERSCORES 0\n")
+  endif()
 else ()
 
   #When we only build CBLAS, we set NOFORTRAN=2

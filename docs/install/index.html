@@ -1380,7 +1380,6 @@ Then, generate the import library: <code>dlltool -d libopenblas.def -l libopenbl
 <p>To build OpenBLAS for Android, you will need the following tools installed on your machine:</p>
 <ul>
 <li><a href="https://developer.android.com/ndk/">The Android NDK</a></li>
-<li>Perl</li>
 <li>Clang compiler on the build machine</li>
 </ul>
 <p>The next two sections below describe how to build with Clang for ARMV7 and
@@ -1416,7 +1415,9 @@ utility in the make command above, like so:
 <div class="highlight"><pre><span></span><code><span class="nv">AR</span><span class="o">=</span><span class="si">${</span><span class="nv">NDK_BUNDLE_DIR</span><span class="si">}</span>/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/bin/arm-linux-androideabi-gcc-ar
 </code></pre></div>
 otherwise you may get a linker error complaining like <code>malformed archive header
-name at 8</code> when the native macOS <code>ar</code> command was invoked instead.</p>
+name at 8</code> when the native macOS <code>ar</code> command was invoked instead. Note that
+with recent NDK versions, the AR tool may be named <code>llvm-ar</code> rather than what
+is assumed above.</p>
 <h4 id="building-for-armv8">Building for ARMV8</h4>
 <p><div class="highlight"><pre><span></span><code><span class="c1"># Set path to ndk-bundle</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">NDK_BUNDLE_DIR</span><span class="o">=</span>/path/to/ndk-bundle/
@@ -1440,10 +1441,15 @@ with all other <code>ARMV8</code> targets.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>/opt/android-ndk-r23b/toolchains/llvm/prebuilt/linux-x86_64/bin/:<span class="nv">$PATH</span>
 make<span class="w"> </span><span class="nv">HOSTCC</span><span class="o">=</span>gcc<span class="w"> </span><span class="nv">CC</span><span class="o">=</span>/opt/android-ndk-r23b/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android31-clang<span class="w"> </span><span class="nv">ONLY_CBLAS</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">TARGET</span><span class="o">=</span>ARMV8
 </code></pre></div>
-appears to be sufficient on Linux.</p>
+appears to be sufficient on Linux. On OSX, setting AR to the ar provided in the
+"bin" path of the NDK (probably <code>llvm-ar</code>) is also necessary.</p>
 <details class="note">
 <summary>Alternative build script for 3 architectures</summary>
-<p>This script will build OpenBLAS for 3 architecture (<code>ARMV7</code>, <code>ARMV8</code>, <code>X86</code>) and install them to <code>/opt/OpenBLAS/lib</code>.
+<p>This script will build OpenBLAS for 3 architecture (<code>ARMV7</code>, <code>ARMV8</code>,
+<code>X86</code>) and install them to <code>/opt/OpenBLAS/lib</code>. Of course you can also copy
+only the section that is of interest to you - also notice that the <code>AR=</code>
+line may need adapting to the name of the ar tool provided in your
+<code>$TOOLCHAIN/bin</code> - for example <code>llvm-ar</code> in some recent NDK versions.
 It was tested on macOS with NDK version 21.3.6528147.</p>
 <p><div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">NDK</span><span class="o">=</span>YOUR_PATH_TO_SDK/Android/sdk/ndk/21.3.6528147
 <span class="nb">export</span><span class="w"> </span><span class="nv">TOOLCHAIN</span><span class="o">=</span><span class="nv">$NDK</span>/toolchains/llvm/prebuilt/darwin-x86_64
@@ -1616,7 +1622,7 @@ provides one implementation of <code>malloc</code> for embedded platforms.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 18, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 26, 2024</span>
   </span>
 
     

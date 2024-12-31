@@ -91,6 +91,7 @@ static inline int blas_quickdivide(blasint x, blasint y){
 
 #if defined(C910V) || defined(RISCV64_ZVL256B) || defined(RISCV64_ZVL128B) || defined(x280)
 # include <riscv_vector.h>
+#define RISCV_SIMD
 #endif
 
 #if defined( __riscv_xtheadc ) && defined( __riscv_v ) && ( __riscv_v <= 7000 )

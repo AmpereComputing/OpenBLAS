@@ -649,6 +649,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#my-build-worked-fine-and-passed-the-blas-tests-but-running-make-lapack-test-ends-with-a-number-of-errors-in-the-summary-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      My build worked fine and passed the BLAS tests, but running make lapack-test ends with a number of errors in the summary report
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#how-could-i-disable-openblas-threading-affinity-on-runtime" class="md-nav__link">
     <span class="md-ellipsis">
       How could I disable OpenBLAS threading affinity on runtime?
@@ -1092,6 +1101,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#my-build-worked-fine-and-passed-the-blas-tests-but-running-make-lapack-test-ends-with-a-number-of-errors-in-the-summary-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      My build worked fine and passed the BLAS tests, but running make lapack-test ends with a number of errors in the summary report
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#how-could-i-disable-openblas-threading-affinity-on-runtime" class="md-nav__link">
     <span class="md-ellipsis">
       How could I disable OpenBLAS threading affinity on runtime?
@@ -1369,6 +1387,7 @@
 <li><a href="#when-i-make-the-library-there-is-no-such-instruction-xgetbv-error-whats-wrong">When I make the library, there is no such instruction: `xgetbv' error. What's wrong?</a></li>
 <li><a href="#my-build-fails-due-to-the-linker-error-multiple-definition-of-dlamc3_-what-is-the-problem">My build fails due to the linker error "multiple definition of `dlamc3_'". What is the problem?</a></li>
 <li><a href="#my-build-worked-fine-and-passed-all-tests-but-running-make-lapack-test-ends-with-segfaults">My build worked fine and passed all tests, but running make lapack-test ends with segfaults</a></li>
+<li><a href="#my-build-worked-fine-and-passed-the-blas-tests-but-running-make-lapack-test-ends-with-a-number-of-errors-in-the-summary-report">My build worked fine and passed the BLAS tests, but running make lapack-test ends with a number of errors in the summary report</a></li>
 <li><a href="#how-could-i-disable-openblas-threading-affinity-on-runtime">How could I disable OpenBLAS threading affinity on runtime?</a></li>
 <li><a href="#how-to-solve-undefined-reference-errors-when-statically-linking-against-libopenblasa">How to solve undefined reference errors when statically linking against libopenblas.a</a></li>
 <li><a href="#building-openblas-for-haswell-or-dynamic-arch-on-rhel-6-centos-6-rocks-61scientific-linux-6">Building OpenBLAS for Haswell or Dynamic Arch on RHEL-6, CentOS-6, Rocks-6.1,Scientific Linux 6</a></li>
@@ -1429,8 +1448,8 @@ While this article is paywalled and too old for preprints to be available on arx
 publications like https://arxiv.org/pdf/1609.00076 contain at least a brief description of the algorithm.
 In practice, the values are derived by experimentation to yield the block sizes that give the highest performance. A general rule of thumb for selecting a starting point seems to be that PxQ is about half the size of L2 cache.</p>
 <h3 id="how-can-i-report-a-bug"><a name="reportbug"></a>How can I report a bug?</h3>
-<p>Please file an issue at this <a href="https://github.com/xianyi/OpenBLAS/issues">issue page</a> or send mail to the <a href="https://groups.google.com/forum/#!forum/openblas-users">OpenBLAS mailing list</a>.</p>
-<p>Please provide the following information: CPU, OS, compiler, and OpenBLAS compiling flags (Makefile.rule). In addition, please describe how to reproduce this bug.</p>
+<p>Please file an issue at this <a href="https://github.com/OpenMathLib/OpenBLAS/issues">issue page</a> or send mail to the <a href="https://groups.google.com/forum/#!forum/openblas-users">OpenBLAS mailing list</a>.</p>
+<p>Please provide the following information: CPU, OS, compiler, OpenBLAS version and any compiling flags you used (Makefile.rule). In addition, please describe how to reproduce this bug.</p>
 <h3 id="how-to-reference-openblas"><a name="publication"></a>How to reference OpenBLAS.</h3>
 <p>You can reference our papers in <a href="../about/#publications">this page</a>. Alternatively, you can cite the OpenBLAS homepage  http://www.openblas.net.</p>
 <h3 id="how-can-i-use-openblas-in-multi-threaded-applications"><a name="multi-threaded"></a>How can I use OpenBLAS in multi-threaded applications?</h3>
@@ -1465,7 +1484,7 @@ Here is the result of the DGEMM subroutine's performance on Intel Core i5-2500K 
 <p>Please read <a href="../install/#visual-studio">this page</a>.</p>
 <h3 id="how-can-i-use-cblas-and-lapacke-without-c99-complex-number-support-eg-in-visual-studio"><a name="C99_complex_number"></a>How can I use CBLAS and LAPACKE without C99 complex number support (e.g. in Visual Studio)?</h3>
 <p>Zaheer has fixed this bug. You can now use the structure instead of C99 complex numbers. Please read <a href="http://github.com/xianyi/OpenBLAS/issues/95">this issue page</a> for details.</p>
-<p><a href="https://github.com/xianyi/OpenBLAS/issues/305">This issue</a> is for using LAPACKE in Visual Studio.</p>
+<p><a href="https://github.com/OpenMathLib/OpenBLAS/issues/305">This issue</a> is for using LAPACKE in Visual Studio.</p>
 <h3 id="i-get-a-segfault-with-multi-threading-on-linux-whats-wrong"><a name="Linux_SEGFAULT"></a>I get a SEGFAULT with multi-threading on Linux. What's wrong?</h3>
 <p>This may be related to a bug in the Linux kernel 2.6.32 (?). Try applying the patch segaults.patch to disable mbind using</p>
 <pre><code> patch &lt; segfaults.patch
@@ -1481,6 +1500,11 @@ Here is the result of the DGEMM subroutine's performance on Intel Core i5-2500K 
 <h3 id="my-build-worked-fine-and-passed-all-tests-but-running-make-lapack-test-ends-with-segfaults"><a name="xeigtst"></a>My build worked fine and passed all tests, but running <code>make lapack-test</code> ends with segfaults</h3>
 <p>Some of the LAPACK tests, notably in xeigtstz, try to allocate around 10MB on the stack. You may need to use
 <code>ulimit -s</code> to change the default limits on your system to allow this.</p>
+<h3 id="my-build-worked-fine-and-passed-the-blas-tests-but-running-make-lapack-test-ends-with-a-number-of-errors-in-the-summary-report"><a name="lapack_test"></a>My build worked fine and passed the BLAS tests, but running <code>make lapack-test</code> ends with a number of errors in the summary report</h3>
+<p>The LAPACK tests were primarily created to test the validity of the Reference-LAPACK implementation, which is implemented in unoptimized, single-threaded Fortran code. This makes it very sensitive to small numerical deviations that can result from the use of specialized cpu instructions that combine multiplications and additions without intermediate rounding and storing to memory (FMA), or from changing the order of mathematical operations by splitting an original problem workload into smaller tasks that are solved in parallel. As a result, you may encounter a small number of errors in the "numerical" column of
+the summary table at the end of the <code>make lapack-test</code> run - this is usually nothing to worry about, and the exact number and distribution of errors among the
+four data types will often vary with the optimization flags you supplied to the compiler, or the cpu model for which you built OpenBLAS. Sporadic errors in the column labeled <code>other</code> are normally the sign of failed convergence of iterative diagonalizations for the same reasons just mentioned. A more detailed error report is stored in the file testing_results.txt - this should be consulted in case of doubt. Care should be taken if you encounter numerical errors in the hundreds, or <code>other</code> errors accompanied by the LAPACK error message "on entry to function_name parameter X had an illegal value" that signals a problem with argument passing between individual functions.
+(See also <a href="https://github.com/OpenMathLib/OpenBLAS/issues/4032">this issue</a> in the issue tracker on github for additional discussion, examples and links)</p>
 <h3 id="how-could-i-disable-openblas-threading-affinity-on-runtime"><a name="no_affinity"></a>How could I disable OpenBLAS threading affinity on runtime?</h3>
 <p>You can define the OPENBLAS_MAIN_FREE or GOTOBLAS_MAIN_FREE environment variable to disable threading affinity on runtime. For example, before the running,
 <div class="highlight"><pre><span></span><code>export OPENBLAS_MAIN_FREE=1
@@ -1643,7 +1667,7 @@ from the main thread of your program (i.e. outside of omp parallel constructs), 
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">March 12, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 30, 2024</span>
   </span>
 
     

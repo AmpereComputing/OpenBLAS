@@ -486,6 +486,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#harmonyos" class="md-nav__link">
+    <span class="md-ellipsis">
+      HarmonyOS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mips" class="md-nav__link">
     <span class="md-ellipsis">
       MIPS
@@ -875,6 +884,15 @@
   <a href="#iphoneios" class="md-nav__link">
     <span class="md-ellipsis">
       iPhone/iOS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#harmonyos" class="md-nav__link">
+    <span class="md-ellipsis">
+      HarmonyOS
     </span>
   </a>
   
@@ -1513,6 +1531,23 @@ make<span class="w"> </span><span class="nv">TARGET</span><span class="o">=</spa
 </code></pre></div>
 Adjust <code>MIN_IOS_VERSION</code> as necessary for your installation. E.g., change the version number
 to the minimum iOS version you want to target and execute this file to build the library.</p>
+<h3 id="harmonyos">HarmonyOS</h3>
+<p>For this target you will need the cross-compiler toolchain package by Huawei, which contains solutions for both Windows and Linux. Only the Linux-based
+toolchain has been tested so far, but the following instructions may apply similarly to Windows:</p>
+<p>Download https://repo.huaweicloud.com/harmonyos/os/4.1.1-Release/ohos-sdk-windows_linux-public.tar.gz (or whatever newer version may be available in the future). Use tar xvf ohos-sdk-windows_linux_public.tar.gz to unpack it somewhere on your system. This will create a folder named "ohos-sdk" with subfolders "linux" and "windows". In the linux one you will find a ZIP archive named "native-linux-x64-4.1.7.8-Release.zip" - you need to unzip this where you want to
+install the cross-compiler, for example in /opt/ohos-sdk.</p>
+<p>In the directory where you unpacked OpenBLAS, create a build directory for cmake, and change into it :
+<div class="highlight"><pre><span></span><code>mkdir build
+cd build
+</code></pre></div>
+Use the version of <code>cmake</code> that came with the SDK, and specify the location of its toolchain file as a cmake option. Also set the build target for OpenBLAS to ARMV8 and specify NOFORTRAN=1 (at least as of version 4.1.1, the SDK contains no Fortran compiler):
+<div class="highlight"><pre><span></span><code>/opt/ohos-sdk/linux/native/build-tools/cmake/bin/cmake -DCMAKE_TOOLCHAIN_FILE=/opt/ohos-sdk/linux/native/build/cmake/ohos.toolchain.cmake \
+      -DOHOS_ARCH=&quot;arm64-v8a&quot; -DTARGET=ARMV8 -DNOFORTRAN=1 ..
+</code></pre></div>
+Additional other OpenBLAS build options like USE_OPENMP=1 or DYNAMIC_ARCH=1 will probably work too.
+Finally do the build:
+<div class="highlight"><pre><span></span><code>/opt/ohos-sdk/linux/native/build-tools/cmake/bin/cmake --build .
+</code></pre></div></p>
 <h3 id="mips">MIPS</h3>
 <p>For MIPS targets you will need latest toolchains:</p>
 <ul>
@@ -1622,7 +1657,7 @@ provides one implementation of <code>malloc</code> for embedded platforms.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 26, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">January 3, 2025</span>
   </span>
 
     

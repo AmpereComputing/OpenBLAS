@@ -621,6 +621,26 @@
   
   
     <li class="md-nav__item">
+      <a href="../runtime_variables/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Runtime variables
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../distributing/" class="md-nav__link">
         
   
@@ -1320,7 +1340,10 @@ use the <a href="https://github.com/rainers/cv2pdb">cv2pdb</a> tool to do so.</p
 the LLVM toolchain enables native compilation of the Fortran sources of LAPACK and of all the optimized assembly files, which VisualStudio cannot handle on its own)</p>
 <ol>
 <li>
-<p>Clone OpenBLAS to your local machine and checkout to latest release of OpenBLAS (unless you want to build the latest development snapshot - here we are using  the 0.3.28 release as the example, of course this exact version may be outdated by the time you read this) </p>
+<p>Clone OpenBLAS to your local machine and checkout to latest release of
+   OpenBLAS (unless you want to build the latest development snapshot - here we
+   are using  the 0.3.28 release as the example, of course this exact version
+   may be outdated by the time you read this)</p>
 <div class="highlight"><pre><span></span><code>git clone https://github.com/OpenMathLib/OpenBLAS.git
 cd OpenBLAS
 git checkout v0.3.28
@@ -1328,35 +1351,47 @@ git checkout v0.3.28
 </li>
 <li>
 <p>Install Latest LLVM toolchain for WoA:</p>
+<p>Download the Latest LLVM toolchain for WoA from <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-19.1.5">the Release
+   page</a>. At
+   the time of writing, this is version 19.1.5 - be sure to select the
+   latest release for which you can find a precompiled package whose name ends
+   in "-woa64.exe" (precompiled packages usually lag a week or two behind their
+   corresponding source release).  Make sure to enable the option
+   <em>“Add LLVM to the system PATH for all the users”</em>.</p>
+<p>Note: Make sure that the path of LLVM toolchain is at the top of Environment
+   Variables section to avoid conflicts between the set of compilers available
+   in the system path</p>
+</li>
+<li>
+<p>Launch the Native Command Prompt for Windows ARM64:</p>
+<p>From the start menu search for <em>"ARM64 Native Tools Command Prompt for Visual
+   Studio 2022"</em>. Alternatively open command prompt, run the following command to
+   activate the environment:</p>
+<div class="highlight"><pre><span></span><code>C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsarm64.bat
+</code></pre></div>
+</li>
+<li>
+<p>Navigate to the OpenBLAS source code directory and start building OpenBLAS
+   by invoking Ninja:</p>
+<div class="highlight"><pre><span></span><code>cd OpenBLAS
+mkdir build
+cd build
+
+cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DTARGET=ARMV8 -DBINARY=64 -DCMAKE_C_COMPILER=clang-cl -DCMAKE_C_COMPILER=arm64-pc-windows-msvc -DCMAKE_ASM_COMPILER=arm64-pc-windows-msvc -DCMAKE_Fortran_COMPILER=flang-new
+
+ninja -j16
+</code></pre></div>
+<p>Note: You might want to include additional options in the cmake command
+   here. For example, the default configuration only generates a
+   <code>static.lib</code> version of the library. If you prefer a DLL, you can add
+   <code>-DBUILD_SHARED_LIBS=ON</code>.</p>
+<p>Note that it is also possible to use the same setup to build OpenBLAS
+   with Make, if you prefer Makefiles over the CMake build for some
+   reason:</p>
+<div class="highlight"><pre><span></span><code>$ make CC=clang-cl FC=flang-new AR=&quot;llvm-ar&quot; TARGET=ARMV8 ARCH=arm64 RANLIB=&quot;llvm-ranlib&quot; MAKE=make
+</code></pre></div>
 </li>
 </ol>
-<p>Download the Latest LLVM toolchain for WoA from <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-19.1.5">the Release page</a>. At the time of writing, this     is version 19.1.5 - be sure to select the latest release for which you can find a precompiled package whose name ends in "-woa64.exe" (precompiled packages
-usually lag a week or two behind their corresponding source release).<br />
-Make sure to enable the option “Add LLVM to the system PATH for all the users”
-Note: Make sure that the path of LLVM toolchain is at the top of Environment Variables section to avoid conflicts between the set of compilers available in the system path</p>
-<ol>
-<li>Launch the Native Command Prompt for Windows ARM64:</li>
-</ol>
-<p>From the start menu search for “ARM64 Native Tools Command Prompt for Visual Studio 2022”
-Alternatively open command prompt, run the following command to activate the environment:
-"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsarm64.bat"</p>
-<p>Navigate to the OpenBLAS source code directory and start building OpenBLAS by invoking Ninja:</p>
-<pre><code>   ```cmd
-   cd OpenBLAS
-   mkdir build
-   cd build
-
-   cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release -DTARGET=ARMV8 -DBINARY=64 -DCMAKE_C_COMPILER=clang-cl -DCMAKE_C_COMPILER=arm64-pc-windows-msvc -DCMAKE_ASM_COMPILER=arm64-pc-windows-msvc -DCMAKE_Fortran_COMPILER=flang-new
-
-   ninja -j16
-   ```
-</code></pre>
-<p>Note: You might want to include additional options in the cmake command here. For example, the default configuration only generates a static.lib version of the library. If you prefer a DLL, you can add -DBUILD_SHARED_LIBS=ON.</p>
-<p>Note that it is also possible to use the same setup to build OpenBLAS with Make, if you prepare Makefiles over the CMake build for some reason:</p>
-<pre><code>```cmd
-$ make CC=clang-cl FC=flang-new AR="llvm-ar" TARGET=ARMV8 ARCH=arm64 RANLIB="llvm-ranlib" MAKE=make
-```
-</code></pre>
 <h4 id="generating-an-import-library">Generating an import library</h4>
 <p>Microsoft Windows has this thing called "import libraries". You need it for
 MSVC; you don't need it for MinGW because the <code>ld</code> linker is smart enough -
@@ -1373,7 +1408,7 @@ In your shell, move to this directory: <code>cd exports</code>.</p>
 MSVC and MinGW are actually identical, so linking is actually okay (any
 incompatibility in the C ABI would be a bug).</p>
 <p>The import libraries of MSVC have the suffix <code>.lib</code>. They are generated
-from a <code>.def</code> file using MSVC's <code>lib.exe</code>. See <a href="use_visual_studio.md#generate-import-library-before-0210-version">the MSVC instructions</a>.</p>
+from a <code>.def</code> file using MSVC's <code>lib.exe</code>.</p>
 </div>
 <div class="tabbed-block">
 <p>MinGW import libraries have the suffix <code>.a</code>, just like static libraries.
@@ -1532,21 +1567,32 @@ make<span class="w"> </span><span class="nv">TARGET</span><span class="o">=</spa
 Adjust <code>MIN_IOS_VERSION</code> as necessary for your installation. E.g., change the version number
 to the minimum iOS version you want to target and execute this file to build the library.</p>
 <h3 id="harmonyos">HarmonyOS</h3>
-<p>For this target you will need the cross-compiler toolchain package by Huawei, which contains solutions for both Windows and Linux. Only the Linux-based
-toolchain has been tested so far, but the following instructions may apply similarly to Windows:</p>
-<p>Download https://repo.huaweicloud.com/harmonyos/os/4.1.1-Release/ohos-sdk-windows_linux-public.tar.gz (or whatever newer version may be available in the future). Use tar xvf ohos-sdk-windows_linux_public.tar.gz to unpack it somewhere on your system. This will create a folder named "ohos-sdk" with subfolders "linux" and "windows". In the linux one you will find a ZIP archive named "native-linux-x64-4.1.7.8-Release.zip" - you need to unzip this where you want to
-install the cross-compiler, for example in /opt/ohos-sdk.</p>
+<p>For this target you will need the cross-compiler toolchain package by Huawei,
+which contains solutions for both Windows and Linux. Only the Linux-based
+toolchain has been tested so far, but the following instructions may apply
+similarly to Windows:</p>
+<p>Download <a href="https://repo.huaweicloud.com/harmonyos/os/4.1.1-Release/ohos-sdk-windows_linux-public.tar.gz">this HarmonyOS 4.1.1 SDK</a>,
+or whatever newer version may be available in the future). Use <code>tar -xvf
+ohos-sdk-windows_linux_public.tar.gz</code> to unpack it somewhere on your system.
+This will create a folder named "ohos-sdk" with subfolders "linux" and
+"windows". In the linux one you will find a ZIP archive named
+<code>native-linux-x64-4.1.7.8-Release.zip</code> - you need to unzip this where you want
+to install the cross-compiler, for example in <code>/opt/ohos-sdk</code>.</p>
 <p>In the directory where you unpacked OpenBLAS, create a build directory for cmake, and change into it :
-<div class="highlight"><pre><span></span><code>mkdir build
-cd build
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>build
+<span class="nb">cd</span><span class="w"> </span>build
 </code></pre></div>
-Use the version of <code>cmake</code> that came with the SDK, and specify the location of its toolchain file as a cmake option. Also set the build target for OpenBLAS to ARMV8 and specify NOFORTRAN=1 (at least as of version 4.1.1, the SDK contains no Fortran compiler):
-<div class="highlight"><pre><span></span><code>/opt/ohos-sdk/linux/native/build-tools/cmake/bin/cmake -DCMAKE_TOOLCHAIN_FILE=/opt/ohos-sdk/linux/native/build/cmake/ohos.toolchain.cmake \
-      -DOHOS_ARCH=&quot;arm64-v8a&quot; -DTARGET=ARMV8 -DNOFORTRAN=1 ..
+Use the version of <code>cmake</code> that came with the SDK, and specify the location of
+its toolchain file as a cmake option. Also set the build target for OpenBLAS to
+<code>ARMV8</code> and specify <code>NOFORTRAN=1</code> (at least as of version 4.1.1, the SDK
+contains no Fortran compiler):
+<div class="highlight"><pre><span></span><code>/opt/ohos-sdk/linux/native/build-tools/cmake/bin/cmake<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>-DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>/opt/ohos-sdk/linux/native/build/cmake/ohos.toolchain.cmake<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>-DOHOS_ARCH<span class="o">=</span><span class="s2">&quot;arm64-v8a&quot;</span><span class="w"> </span>-DTARGET<span class="o">=</span>ARMV8<span class="w"> </span>-DNOFORTRAN<span class="o">=</span><span class="m">1</span><span class="w"> </span>..
 </code></pre></div>
-Additional other OpenBLAS build options like USE_OPENMP=1 or DYNAMIC_ARCH=1 will probably work too.
-Finally do the build:
-<div class="highlight"><pre><span></span><code>/opt/ohos-sdk/linux/native/build-tools/cmake/bin/cmake --build .
+Additional other OpenBLAS build options like <code>USE_OPENMP=1</code> or <code>DYNAMIC_ARCH=1</code>
+will probably work too. Finally do the build:
+<div class="highlight"><pre><span></span><code>/opt/ohos-sdk/linux/native/build-tools/cmake/bin/cmake<span class="w"> </span>--build<span class="w"> </span>.
 </code></pre></div></p>
 <h3 id="mips">MIPS</h3>
 <p>For MIPS targets you will need latest toolchains:</p>
@@ -1657,7 +1703,7 @@ provides one implementation of <code>malloc</code> for embedded platforms.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">January 3, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">January 4, 2025</span>
   </span>
 
     

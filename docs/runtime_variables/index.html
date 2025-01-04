@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://openblas.net/docs/runtime_variables/">
       
       
+        <link rel="prev" href="../build_system/">
+      
+      
+        <link rel="next" href="../distributing/">
       
       
       <link rel="icon" href="../logo.svg">
@@ -68,11 +72,6 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
-      
-        
-        <a href="#runtime-variables" class="md-skip">
-          Skip to content
-        </a>
       
     </div>
     <div data-md-component="announce">
@@ -364,6 +363,34 @@
       
   
   
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Runtime variables
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
   
   
     <li class="md-nav__item">
@@ -458,23 +485,6 @@
   
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#runtime-variables" class="md-nav__link">
-    <span class="md-ellipsis">
-      Runtime variables
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -493,29 +503,50 @@
 
   <h1>Runtime variables</h1>
 
-<h2 id="runtime-variables">Runtime variables</h2>
 <p>OpenBLAS checks the following environment variables on startup:</p>
 <ul>
-<li><strong>OPENBLAS_NUM_THREADS=</strong>   the number of threads to use (for non-OpenMP-builds of OpenBLAS)</li>
-<li><strong>OMP_NUM_THREADS=</strong>        the number of threads to use (for OpenMP builds - note that setting this may also affect any other OpenMP code)</li>
+<li><code>OPENBLAS_NUM_THREADS</code>: the number of threads to use (for non-OpenMP builds
+  of OpenBLAS)</li>
+<li><code>OMP_NUM_THREADS</code>: the number of threads to use (for OpenMP builds - note
+  that setting this may also affect any other OpenMP code)</li>
 <li>
-<p><strong>OPENBLAS_DEFAULT_NUM_THREADS=</strong>   the number of threads to use, irrespective if OpenBLAS was built for OpenMP or pthreads</p>
+<p><code>OPENBLAS_DEFAULT_NUM_THREADS</code>: the number of threads to use, irrespective if
+  OpenBLAS was built for OpenMP or pthreads</p>
 </li>
 <li>
-<p><strong>OPENBLAS_MAIN_FREE=1</strong>"   this can be used to disable automatic assignment of cpu affinity in OpenBLAS builds that have it enabled by default</p>
+<p><code>OPENBLAS_MAIN_FREE=1</code>: this can be used to disable automatic assignment of
+  cpu affinity in OpenBLAS builds that have it enabled by default</p>
 </li>
-<li><strong>OPENBLAS_THREAD_TIMEOUT=</strong>  this can be used to define the length of time that idle threads should wait before exiting</li>
-<li><strong>OMP_ADAPTIVE=1</strong>      this can be used in OpenMP builds to actually remove any surplus threads when the number of threads is decreased</li>
+<li><code>OPENBLAS_THREAD_TIMEOUT</code>: this can be used to define the length of time
+  that idle threads should wait before exiting</li>
+<li><code>OMP_ADAPTIVE=1</code>: this can be used in OpenMP builds to actually remove any
+  surplus threads when the number of threads is decreased</li>
 </ul>
-<p>DYNAMIC_ARCH builds also accept the following:
-* <strong>OPENBLAS_VERBOSE=</strong>       set this to "1" to enable a warning when there is no exact match for the detected cpu in the library
-                              set this to "2" to make OpenBLAS print the name of the cpu target it autodetected
-* <strong>OPENBLAS_CORETYPE=</strong>      set this to one of the supported target names to override autodetection, e.g. OPENBLAS_CORETYPE=HASWELL
-* <strong>OPENBLAS_L2_SIZE=</strong>       set this to override the autodetected size of the L2 cache where it is not reported correctly (in virtual environments)</p>
-<p>Deprecated variables still recognized for compatibilty:
-* <strong>GOTO_NUM_THREADS=</strong>    equivalent to <strong>OPENBLAS_NUM_THREADS</strong>
-* <strong>GOTOBLAS_MAIN_FREE</strong>   equivalent to <strong>OPENBLAS_MAIN_FREE</strong>
-* <strong>OPENBLAS_BLOCK_FACTOR</strong>   this applies a scale factor to the GEMM "P" parameter of the block matrix code, see file driver/others/parameter.cen</p>
+<p><code>DYNAMIC_ARCH</code> builds also accept the following:</p>
+<ul>
+<li>
+<p><code>OPENBLAS_VERBOSE</code>:</p>
+<ul>
+<li>set this to <code>1</code> to enable a warning when there is no exact match for the
+  detected cpu in the library</li>
+<li>set this to <code>2</code> to make OpenBLAS print the name of the cpu target it
+  autodetected</li>
+</ul>
+</li>
+<li>
+<p><code>OPENBLAS_CORETYPE</code>: set this to one of the supported target names to
+  override autodetection, e.g., <code>OPENBLAS_CORETYPE=HASWELL</code></p>
+</li>
+<li><code>OPENBLAS_L2_SIZE</code>: set this to override the autodetected size of the L2
+  cache where it is not reported correctly (in virtual environments)</li>
+</ul>
+<p>Deprecated variables still recognized for compatibilty:</p>
+<ul>
+<li><code>GOTO_NUM_THREADS</code>: equivalent to <code>OPENBLAS_NUM_THREADS</code></li>
+<li><code>GOTOBLAS_MAIN_FREE</code>: equivalent to <code>OPENBLAS_MAIN_FREE</code></li>
+<li><code>OPENBLAS_BLOCK_FACTOR</code>: this applies a scale factor to the GEMM "P"
+  parameter of the block matrix code, see file <code>driver/others/parameter.c</code></li>
+</ul>
 
 
 

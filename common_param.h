@@ -197,6 +197,7 @@ BLASLONG (*ismin_k) (BLASLONG, float *, BLASLONG);
   //double (*dsdot_k) (BLASLONG, float *, BLASLONG, float *, BLASLONG);
 
   int    (*srot_k)  (BLASLONG, float *, BLASLONG, float *, BLASLONG, float, float);
+  int    (*srotm_k) (BLASLONG, float *, BLASLONG, float *, BLASLONG, float *);
 #endif
 #if (BUILD_SINGLE==1) || (BUILD_DOUBLE==1) || (BUILD_COMPLEX==1)
   int    (*saxpy_k) (BLASLONG, BLASLONG, BLASLONG, float, float *, BLASLONG, float *, BLASLONG, float *, BLASLONG);
@@ -330,6 +331,7 @@ BLASLONG (*idmin_k) (BLASLONG, double *, BLASLONG);
 #endif
 #if (BUILD_DOUBLE==1) || (BUILD_COMPLEX16==1)
   int    (*drot_k)  (BLASLONG, double *, BLASLONG, double *, BLASLONG, double, double);
+  int    (*drotm_k) (BLASLONG, double *, BLASLONG, double *, BLASLONG, double *);
   int    (*daxpy_k) (BLASLONG, BLASLONG, BLASLONG, double, double *, BLASLONG, double *, BLASLONG, double *, BLASLONG);
   int    (*dscal_k) (BLASLONG, BLASLONG, BLASLONG, double, double *, BLASLONG, double *, BLASLONG, double *, BLASLONG);
   int    (*dswap_k) (BLASLONG, BLASLONG, BLASLONG, double, double *, BLASLONG, double *, BLASLONG, double *, BLASLONG);

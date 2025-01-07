@@ -1,3 +1,4 @@
+
 /*********************************************************************/
 /* Copyright 2009, 2010 The University of Texas at Austin.           */
 /* All rights reserved.                                              */
@@ -213,8 +214,8 @@ int    srotmg_k(float  *, float  *, float  *, float  *, float  *);
 int    drotmg_k(double *, double *, double *, double *, double *);
 int    qrotmg_k(xdouble *, xdouble *, xdouble *, xdouble *, xdouble *);
 
-int    srotm_k (BLASLONG, float,  BLASLONG, float,  BLASLONG, float);
-int    drotm_k (BLASLONG, double, BLASLONG, double, BLASLONG, double);
+int    srotm_k (BLASLONG, float  *, BLASLONG, float  *, BLASLONG, float  *);
+int    drotm_k (BLASLONG, double *, BLASLONG, double *, BLASLONG, double *);
 int    qrotm_k (BLASLONG, xdouble, BLASLONG, xdouble, BLASLONG, xdouble);
 
 

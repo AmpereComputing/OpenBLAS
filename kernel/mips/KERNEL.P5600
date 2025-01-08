@@ -100,6 +100,9 @@ CROTKERNEL   = ../mips/zrot.c
 ZROTKERNEL   = ../mips/zrot.c
 endif
 
+SROTMKERNEL  = ../riscv64/rotm.c
+DROTMKERNEL  = ../riscv64/rotm.c
+
 ifndef NO_MSA
 SSCALKERNEL  = ../mips/sscal_msa.c
 DSCALKERNEL  = ../mips/dscal_msa.c

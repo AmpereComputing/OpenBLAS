@@ -74,6 +74,9 @@ DROTKERNEL  =  rot_lasx.S
 CROTKERNEL  =  crot_lasx.S
 ZROTKERNEL  =  crot_lasx.S
 
+SROTMKERNEL  = ../riscv64/rotm.c
+DROTMKERNEL  = ../riscv64/rotm.c
+
 SNRM2KERNEL =  snrm2_lasx.S
 DNRM2KERNEL =  dnrm2_lasx.S
 CNRM2KERNEL =  cnrm2_lasx.S

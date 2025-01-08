@@ -18,6 +18,14 @@ ifndef SROTKERNEL
 SROTKERNEL  = ../arm/rot.c
 endif
 
+ifndef SROTMKERNEL
+SROTMKERNEL  = ../riscv64/rotm.c
+endif
+
+ifndef DROTMKERNEL
+DROTMKERNEL  = ../riscv64/rotm.c
+endif
+
 ifndef DROTKERNEL
 DROTKERNEL  = ../arm/rot.c
 endif

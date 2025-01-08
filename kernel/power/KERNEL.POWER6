@@ -57,3 +57,6 @@ ZTRSMKERNEL_RT	=  ztrsm_kernel_power6_RT.S
 
 CROTKERNEL = ../arm/zrot.c
 ZROTKERNEL = ../arm/zrot.c
+
+SROTMKERNEL  = ../riscv64/rotm.c
+DROTMKERNEL  = ../riscv64/rotm.c

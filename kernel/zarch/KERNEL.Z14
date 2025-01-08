@@ -66,6 +66,9 @@ DROTKERNEL   = drot.c
 CROTKERNEL   = crot.c
 ZROTKERNEL   = zrot.c
 
+SROTMKERNEL  = ../riscv64/rotm.c
+DROTMKERNEL  = ../riscv64/rotm.c
+
 SSCALKERNEL  = sscal.c
 DSCALKERNEL  = dscal.c
 CSCALKERNEL  = cscal.c

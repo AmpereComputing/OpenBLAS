@@ -70,6 +70,9 @@ CROTKERNEL	= ../arm/zrot.c
 ZROTKERNEL	= ../arm/zrot.c
 endif
 
+SROTMKERNEL  = ../riscv64/rotm.c
+DROTMKERNEL  = ../riscv64/rotm.c
+
 SSCALKERNEL	=  scal_ppc440.S
 DSCALKERNEL	=  scal_ppc440.S
 CSCALKERNEL	= zscal_ppc440.S

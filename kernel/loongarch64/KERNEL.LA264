@@ -74,6 +74,9 @@ DROTKERNEL  =  rot_lsx.S
 CROTKERNEL  =  crot_lsx.S
 ZROTKERNEL  =  crot_lsx.S
 
+SROTMKERNEL  = ../riscv64/rotm.c
+DROTMKERNEL  = ../riscv64/rotm.c
+
 SNRM2KERNEL =  snrm2_lsx.S
 DNRM2KERNEL =  dnrm2_lsx.S
 CNRM2KERNEL =  cnrm2_lsx.S

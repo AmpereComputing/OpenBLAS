@@ -6,8 +6,10 @@ CROTKERNEL  = ../mips/zrot.c
 ZROTKERNEL  = ../mips/zrot.c
 CSWAPKERNEL = ../mips/zswap.c
 ZSWAPKERNEL = ../mips/zswap.c
-                                                                                        
-                                                                                                                                          
+
+SROTMKERNEL  = ../riscv64/rotm.c
+DROTMKERNEL  = ../riscv64/rotm.c
+                                                                                                                                         
 ifndef SNRM2KERNEL
 SNRM2KERNEL = snrm2.S
 endif

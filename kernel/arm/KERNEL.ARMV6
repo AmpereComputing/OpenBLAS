@@ -50,6 +50,9 @@ DROTKERNEL   = rot_vfp.S
 CROTKERNEL   = rot_vfp.S
 ZROTKERNEL   = rot_vfp.S
 
+SROTMKERNEL  = ../riscv64/rotm.c
+DROTMKERNEL  = ../riscv64/rotm.c
+
 SDOTKERNEL   = sdot_vfp.S
 DDOTKERNEL   = ddot_vfp.S
 CDOTKERNEL   = cdot_vfp.S

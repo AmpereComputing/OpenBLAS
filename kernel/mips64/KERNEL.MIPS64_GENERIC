@@ -120,6 +120,9 @@ DROTKERNEL   = ../mips/rot.c
 CROTKERNEL   = ../mips/zrot.c
 ZROTKERNEL   = ../mips/zrot.c
 
+SROTMKERNEL  = ../riscv64/rotm.c
+DROTMKERNEL  = ../riscv64/rotm.c
+
 SSCALKERNEL  = ../mips/scal.c
 DSCALKERNEL  = ../mips/scal.c
 CSCALKERNEL  = ../mips/zscal.c

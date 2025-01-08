@@ -298,6 +298,14 @@ ifndef ZROTKERNEL
 ZROTKERNEL = zrot_sse2.S
 endif
 
+ifndef SROTMKERNEL
+SROTMKERNEL  = ../riscv64/rotm.c
+endif
+
+ifndef DROTMKERNEL
+DROTMKERNEL  = ../riscv64/rotm.c
+endif
+
 ifndef XROTKERNEL
 XROTKERNEL = zrot.S
 endif

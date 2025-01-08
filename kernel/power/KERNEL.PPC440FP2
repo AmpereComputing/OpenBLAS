@@ -60,6 +60,9 @@ DROTKERNEL	=  rot_ppc440.S
 CROTKERNEL	= zrot_ppc440.S
 ZROTKERNEL	= zrot_ppc440.S
 
+SROTMKERNEL  = ../riscv64/rotm.c
+DROTMKERNEL  = ../riscv64/rotm.c
+
 SSCALKERNEL	=  scal_hummer.S
 DSCALKERNEL	=  scal_hummer.S
 CSCALKERNEL	= zscal_hummer.S

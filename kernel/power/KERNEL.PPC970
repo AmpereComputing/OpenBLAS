@@ -89,3 +89,6 @@ DROTKERNEL   = ../arm/rot.c
 CROTKERNEL   = ../arm/zrot.c
 ZROTKERNEL   = ../arm/zrot.c
 endif
+
+SROTMKERNEL  = ../riscv64/rotm.c
+DROTMKERNEL  = ../riscv64/rotm.c

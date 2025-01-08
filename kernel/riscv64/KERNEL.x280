@@ -101,6 +101,9 @@ ZROTKERNEL   = zrot_rvv.c
 SROTMKERNEL  = rotm_rvv.c
 DROTMKERNEL  = rotm_rvv.c
 
+SROTMKERNEL  = rotm_rvv.c
+DROTMKERNEL  = rotm_rvv.c
+
 SSCALKERNEL  = scal_rvv.c
 DSCALKERNEL  = scal_rvv.c
 CSCALKERNEL  = zscal_rvv.c

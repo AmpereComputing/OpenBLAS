@@ -37,7 +37,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install autoconf automake autotools-dev ninja-build make ccache \
-          gcc-${{ matrix.apt_triple }} gfortran-${{ matrix.apt_triple }} libgomp1-riscv64-cross
+          gcc-${{ matrix.apt_triple }} gfortran-${{ matrix.apt_triple }} libgomp1-riscv64-cross libglib2.0-dev
 
       - name: checkout qemu
         uses: actions/checkout@v3

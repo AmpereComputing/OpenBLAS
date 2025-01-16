@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-22]
         fortran: [gfortran]
         build: [make]
         pyver: ["3.12"]
@@ -36,7 +36,7 @@ jobs:
         run: |
           if [ "$RUNNER_OS" == "Linux" ]; then
             sudo apt-get update
-            sudo apt-get install -y gfortran cmake ccache libtinfo6
+            sudo apt-get install -y gfortran cmake ccache libtinfo5
           else
             echo "::error::$RUNNER_OS not supported"
             exit 1
@@ -147,7 +147,7 @@ jobs:
           OPENBLAS_NUM_THREADS=1 pytest benchmarks/bench_blas.py -k 'gesdd'
 
       - name: Run benchmarks
-        uses: CodSpeedHQ/action@v2
+        uses: CodSpeedHQ/action@v3
         with:
           token: ${{ secrets.CODSPEED_TOKEN }}
           run: |

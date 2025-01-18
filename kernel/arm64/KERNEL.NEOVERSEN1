@@ -98,9 +98,14 @@ ZNRM2KERNEL    = znrm2.S
 
 DDOTKERNEL     = dot.c
 SDOTKERNEL     = dot.c
-if  defined(__clang__) && defined(OS_WINDOWS)
+ifeq ($(OSNAME), WINNT)
+ifeq ($(C_COMPILER), CLANG)
 CDOTKERNEL     = zdot.S
 ZDOTKERNEL     = zdot.S
+else
+CDOTKERNEL     = zdot_thunderx2t99.c
+ZDOTKERNEL     = zdot_thunderx2t99.c
+endif
 else
 CDOTKERNEL     = zdot_thunderx2t99.c
 ZDOTKERNEL     = zdot_thunderx2t99.c

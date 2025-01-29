@@ -174,7 +174,7 @@ jobs:
   steps:   
   - script: |
       brew update
-      brew install llvm
+      brew install llvm flang
       make TARGET=NEHALEM CC=/usr/local/opt/llvm/bin/clang FC=/usr/local/opt/llvm/bin/flang-new
 
 - job: OSX_OpenMP_Clang

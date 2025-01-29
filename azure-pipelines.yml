@@ -165,7 +165,7 @@ jobs:
       brew update
       make CC=gcc-12 FC=gfortran-12
 
-- job: OSX_LLVM_flang-new
+- job: OSX_LLVM_flangnew
   pool:
      vmImage: 'macOS-latest'
   variables:

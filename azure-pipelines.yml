@@ -175,11 +175,7 @@ jobs:
   - script: |
       brew update
       brew install llvm flang
-      data=`/usr/local/Cellar/flang/19.1.7_1/bin/flang-new -v 2>&1 > /dev/null `
-      v="${data#*version *}"
-      v="${v%%*.}"
-      major="${v%%.*}"
-      echo $major
+      cat f_check
       make TARGET=NEHALEM CC=/usr/local/opt/llvm/bin/clang FC=/usr/local/Cellar/flang/19.1.7_1/bin/flang-new
 
 - job: OSX_OpenMP_Clang

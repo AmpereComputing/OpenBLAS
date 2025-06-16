@@ -3633,6 +3633,41 @@ is a big desktop or server with abundant cache rather than a phone or embedded d
 #define CGEMM_DEFAULT_R 4096
 #define ZGEMM_DEFAULT_R 4096
 
+#elif defined(AMPERE1) || defined(AMPERE1A)
+
+#if defined(XDOUBLE) || defined(DOUBLE)
+#define SWITCH_RATIO            8
+#else
+#define SWITCH_RATIO            16
+#endif
+
+#define SGEMM_DEFAULT_UNROLL_M  16
+#define SGEMM_DEFAULT_UNROLL_N  4
+
+#define DGEMM_DEFAULT_UNROLL_M  8
+#define DGEMM_DEFAULT_UNROLL_N  4
+
+#define CGEMM_DEFAULT_UNROLL_M  8
+#define CGEMM_DEFAULT_UNROLL_N  4
+
+#define ZGEMM_DEFAULT_UNROLL_M  4
+#define ZGEMM_DEFAULT_UNROLL_N  4
+
+#define SGEMM_DEFAULT_P	240
+#define DGEMM_DEFAULT_P	240
+#define CGEMM_DEFAULT_P 128
+#define ZGEMM_DEFAULT_P 128
+
+#define SGEMM_DEFAULT_Q 640
+#define DGEMM_DEFAULT_Q 320
+#define CGEMM_DEFAULT_Q 224
+#define ZGEMM_DEFAULT_Q 112
+
+#define SGEMM_DEFAULT_R 4096
+#define DGEMM_DEFAULT_R 4096
+#define CGEMM_DEFAULT_R 4096
+#define ZGEMM_DEFAULT_R 4096
+
 #elif defined(A64FX) // 512-bit SVE
 
 /* When all BLAS3 routines are implemeted with SVE, SGEMM_DEFAULT_UNROLL_M should be "sve_vl".
